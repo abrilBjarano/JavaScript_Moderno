@@ -11,4 +11,4 @@ let especiales = ['A','J','Q','K'];
 
 
 
-/* This function create a new deck */
+/* This function create a new deck */ //
