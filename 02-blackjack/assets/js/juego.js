@@ -6,7 +6,6 @@
 */
 
 let deck       = [];
-const numeros  = [2, 3, 4, 5, 6, 7, 8, 9, 10]; 
 let tipos      = ['C','D','H','S'];
 let especiales = ['A','J','Q','K'];
 
@@ -15,10 +14,10 @@ let especiales = ['A','J','Q','K'];
 
 const crearDeck = ( ) => {
 
-    for( let num in numeros){
+    for( let i = 2; i <= 10; i++){
         for(let tipo of tipos){
 
-            deck.push( num + tipo);
+            deck.push( i + tipo);
         }
     }
 
@@ -35,8 +34,7 @@ const crearDeck = ( ) => {
 
 crearDeck();
 
-
-/* This function let pick a cart */
+/* This function let pick a card */
 
 const pedirCarta = () => {
 
@@ -45,11 +43,25 @@ const pedirCarta = () => {
     }
 
     let carta = deck.shift();
-    console.log( deck );
     console.log( carta );
+    return carta;
 }
 
-pedirCarta();
+// pedirCarta();
+
+/* This functions creates the value of each card */ 
+const valorCarta = ( carta ) => {
+    
+    const valor = carta.substring(0, carta.length - 1);
+    return ( isNaN( valor ) ) ?
+            ( valor === 'A' ) ? 11 : 10
+            : valor * 1;
+}
+
+const valor = valorCarta( pedirCarta() );
+console.log({ valor });
+
+
 
 
 
