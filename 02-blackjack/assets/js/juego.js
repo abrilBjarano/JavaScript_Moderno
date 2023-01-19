@@ -5,10 +5,17 @@
     * 2S = Two of Spades
 */
 
-let deck       = [];
-let tipos      = ['C','D','H','S'];
-let especiales = ['A','J','Q','K'];
+let deck         = [];
+const tipos      = ['C','D','H','S'],
+      especiales = ['A','J','Q','K'];
 
+let puntosJugador     = 0,
+    puntosComputadora = 0;
+
+// Referencias HTML
+const btnPedir = document.querySelector('#btnPedir');
+const divCartasJugador = document.querySelector('#jugador-cartas');
+const puntos = document.querySelectorAll('small');
 
 /* This function create a new deck */
 
@@ -43,7 +50,6 @@ const pedirCarta = () => {
     }
 
     let carta = deck.shift();
-    console.log( carta );
     return carta;
 }
 
@@ -58,31 +64,27 @@ const valorCarta = ( carta ) => {
             : valor * 1;
 }
 
-const valor = valorCarta( pedirCarta() );
-console.log({ valor });
+// Eventos 
 
+btnPedir.addEventListener('click', () => {
 
+    const carta = pedirCarta();
+    puntosJugador = puntosJugador + valorCarta( carta );
+    puntos[0].innerText = puntosJugador;
 
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.classList.add('carta');
+    
+    divCartasJugador.append( imgCarta );
 
+    if ( puntosJugador > 21 ) {
+        console.warn('Game over');
+        btnPedir.disabled = true;
+    } else if ( puntosJugador === 21 ) {
+        console.warn('21. Muy bien');
+        btnPedir.disabled = true;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
